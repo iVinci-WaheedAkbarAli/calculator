@@ -1,10 +1,7 @@
-import { useState } from 'react'
-import Calculator from './Calculator'
-import './App.css'
+import Calculator from "./Calculator";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Calculator />
@@ -12,4 +9,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
