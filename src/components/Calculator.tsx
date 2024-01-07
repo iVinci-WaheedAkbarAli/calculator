@@ -52,6 +52,14 @@ const Calculator = () => {
     }
   };
 
+  const deleteButton = () => {
+    const lastChar = formula.slice(-1);
+    if (lastChar === ".") {
+      setdecimalPoint(true);
+    }
+    setFormula((prev) => prev.substring(0, prev.length - 1));
+  };
+
   const clearButton = () => {
     setFormula("");
     setdecimalPoint(true);
@@ -79,7 +87,7 @@ const Calculator = () => {
           <InsertButton onClick={() => decimalPointButton(".")}>.</InsertButton>
 
           <InsertButton onClick={() => sumButton()}>=</InsertButton>
-
+          <InsertButton onClick={() => deleteButton()}>D</InsertButton>
           <InsertButton onClick={() => clearButton()}>C</InsertButton>
         </Grid>
       </Box>
