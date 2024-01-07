@@ -1,10 +1,11 @@
 import { useState } from "react";
-import InsertButton from "./components/InsertButton";
+import InsertButton from "./InsertButton";
+import { Box, Input, Grid } from "@chakra-ui/react";
 
 const Calculator = () => {
   const [formula, setFormula] = useState("");
   const [decimalPoint, setdecimalPoint] = useState(true);
-  const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const numbers = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"];
   const operators = ["+", "-", "*", "/"];
 
   const numberButton = (num: string) => {
@@ -58,21 +59,30 @@ const Calculator = () => {
 
   return (
     <>
-      <input defaultValue={formula} />
+      <Input borderColor="black.500" defaultValue={formula} />
+      <Box>
+        <Grid templateColumns="repeat(4, 1fr)" gap={1}>
+          {operators.map((operator) => (
+            <InsertButton
+              key={operator}
+              onClick={() => operatorButton(operator)}
+            >
+              {operator}
+            </InsertButton>
+          ))}
+          {numbers.map((number) => (
+            <InsertButton key={number} onClick={() => numberButton(number)}>
+              {number}
+            </InsertButton>
+          ))}
 
-      {numbers.map((number) => (
-        <InsertButton key={number} onClick={() => numberButton(number)}>
-          {number}
-        </InsertButton>
-      ))}
-      {operators.map((operator) => (
-        <InsertButton key={operator} onClick={() => operatorButton(operator)}>
-          {operator}
-        </InsertButton>
-      ))}
-      <InsertButton onClick={() => sumButton()}>=</InsertButton>
-      <InsertButton onClick={() => decimalPointButton(".")}>.</InsertButton>
-      <InsertButton onClick={() => clearButton()}>C</InsertButton>
+          <InsertButton onClick={() => decimalPointButton(".")}>.</InsertButton>
+
+          <InsertButton onClick={() => sumButton()}>=</InsertButton>
+
+          <InsertButton onClick={() => clearButton()}>C</InsertButton>
+        </Grid>
+      </Box>
     </>
   );
 };
